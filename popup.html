@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bale Notifier Config</title>
+    <link rel="stylesheet" href="popup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-group">
+                <div class="logo-circle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+                        <circle cx="12" cy="12" r="3" fill="var(--primary)"/>
+                    </svg>
+                </div>
+                <h1 data-i18n="appTitle">Telegram Notifier</h1>
+            </div>
+            <div class="header-controls" style="display: flex; gap: 8px; align-items: center;">
+                <button id="themeToggle" class="btn-icon" style="padding: 4px 8px; font-size: 14px;" title="Toggle Light/Dark Mode">☀️</button>
+                <div class="lang-switch">
+                    <button id="langEn" class="active">EN</button>
+                    <button id="langFa">فا</button>
+                </div>
+            </div>
+        </header>
+
+        <section class="card">
+            <div class="card-header">
+                <h2 data-i18n="botSettings">Bot Settings</h2>
+            </div>
+            <div class="input-group">
+                <label for="botToken">
+                    <span data-i18n="botTokenLabel">Bot Token</span>
+                    <div class="tooltip-container">
+                        <svg class="info-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                        <div class="tooltip-text" data-i18n="botTokenTooltip">Message @BotFather on Telegram to create a bot and get your token.</div>
+                    </div>
+                </label>
+                <input type="text" id="botToken" placeholder="e.g. 123456:ABC-DEF...">
+            </div>
+            <div class="input-group">
+                <label for="chatId">
+                    <span data-i18n="chatIdLabel">Chat ID</span>
+                    <div class="tooltip-container">
+                        <svg class="info-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                        <div class="tooltip-text" data-i18n="chatIdTooltip">Message @userinfobot on Telegram and copy the Id number it gives you.</div>
+                    </div>
+                </label>
+                <input type="text" id="chatId" placeholder="e.g. 123456789">
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <h2 style="gap: 6px;">
+                    <span data-i18n="contactsMap">Contacts Mapping</span>
+                    <div class="tooltip-container" style="text-transform: none; letter-spacing: normal;">
+                        <svg class="info-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                        <div class="tooltip-text" data-i18n="contactsTooltip">Open the contact's chat in Bale Web, and copy the number after 'uid=' in the browser address bar.</div>
+                    </div>
+                </h2>
+                <button id="addContactBtn" class="btn-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5V19M5 12H19" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span data-i18n="addBtn">Add</span>
+                </button>
+            </div>
+            <div class="contacts-list" id="contactsList">
+                <!-- Contact rows will be injected here -->
+            </div>
+        </section>
+
+        <div class="actions">
+            <button id="saveBtn" class="btn-primary" data-i18n="saveBtn">Save Configuration</button>
+        </div>
+        <div id="statusMessage" class="status hidden" data-i18n="savedStatus">Saved successfully!</div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

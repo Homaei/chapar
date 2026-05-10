@@ -1,0 +1,445 @@
+:root {
+    --primary: #00B894;
+    --primary-hover: #00A383;
+    --bg-color: #0F172A;
+    --card-bg: #1E293B;
+    --text-main: #F8FAFC;
+    --text-muted: #94A3B8;
+    --border: #334155;
+    --danger: #EF4444;
+}
+
+body.light-mode {
+    --bg-color: #F8FAFC;
+    --card-bg: #FFFFFF;
+    --text-main: #0F172A;
+    --text-muted: #475569;
+    --border: #CBD5E1;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    width: 100%;
+    min-width: 320px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: 'Inter', 'Vazirmatn', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+[dir="rtl"] body {
+    text-align: right;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+.container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-circle {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #00B894 0%, #0076B8 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);
+}
+
+h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.lang-switch {
+    display: flex;
+    background: var(--card-bg);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.lang-switch button {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: 'Inter', 'Vazirmatn', sans-serif;
+    transition: all 0.2s;
+}
+
+.lang-switch button.active {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h2 {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+[dir="rtl"] h2 {
+    letter-spacing: normal;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Tooltip styles */
+.tooltip-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: help;
+}
+
+.info-icon {
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+
+.tooltip-container:hover .info-icon {
+    color: var(--primary);
+}
+
+.tooltip-text {
+    visibility: hidden;
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--primary);
+    width: 220px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.4;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--primary) transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Fix z-index stacking context for tooltips */
+.contact-row:hover,
+.input-wrapper:hover,
+.tooltip-container:hover {
+    z-index: 20;
+}
+
+input {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-family: 'Inter', 'Vazirmatn', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+[dir="rtl"] input {
+    text-align: left; 
+    direction: ltr;
+}
+[dir="rtl"] .contact-name {
+    text-align: right;
+    direction: rtl;
+}
+
+input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(0, 184, 148, 0.2);
+}
+
+input::placeholder {
+    color: #475569;
+}
+
+.contacts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 4px;
+}
+
+.contact-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+    background: var(--card-bg);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    transition: background-color 0.3s;
+}
+
+.contact-inputs {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.contact-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+    border-top: 1px dashed rgba(255,255,255,0.1);
+    padding-top: 8px;
+    margin-top: 2px;
+}
+
+/* Specific styles for inputs with tooltips */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    flex: 1;
+    min-width: 0;
+}
+.input-wrapper input {
+    width: 100%;
+    padding-right: 28px;
+}
+[dir="rtl"] .contact-name-wrapper input {
+    padding-left: 28px;
+    padding-right: 12px;
+}
+[dir="rtl"] .contact-uid-wrapper input {
+    /* Uid is ltr even in rtl mode */
+    padding-right: 28px;
+    padding-left: 12px;
+}
+.row-tooltip {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+[dir="rtl"] .contact-name-wrapper .row-tooltip {
+    right: auto;
+    left: 8px;
+}
+
+.contact-row input {
+    flex: 1;
+    min-width: 0;
+    padding: 8px;
+    font-size: 0.85rem;
+}
+
+.btn-delete {
+    background: transparent;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.btn-delete:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Toggle Icons */
+.toggles-group {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+[dir="rtl"] .toggles-group {
+    /* No borders needed anymore since it's on a new row */
+}
+
+.toggle-label {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.toggle-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.toggle-icon {
+    color: var(--text-muted);
+    opacity: 0.5;
+    transition: all 0.2s;
+}
+
+.toggle-label:hover {
+    background: var(--border);
+}
+
+.toggle-label input:checked ~ .toggle-icon {
+    opacity: 1;
+}
+
+/* Specific colors for specific toggles */
+.toggle-msg input:checked ~ .toggle-icon { color: #3B82F6; } /* Blue */
+.toggle-call input:checked ~ .toggle-icon { color: #8B5CF6; } /* Purple */
+.toggle-online input:checked ~ .toggle-icon { color: #10B981; } /* Green */
+
+.btn-icon {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    font-family: 'Inter', 'Vazirmatn', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.actions {
+    margin-top: auto;
+}
+
+.btn-primary {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-family: 'Inter', 'Vazirmatn', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 184, 148, 0.2);
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.status {
+    text-align: center;
+    font-family: 'Inter', 'Vazirmatn', sans-serif;
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 500;
+    margin-top: -10px;
+    transition: opacity 0.3s;
+}
+
+.status.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
