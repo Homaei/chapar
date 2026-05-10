@@ -42,13 +42,14 @@ A Chrome Extension that intercepts Bale Web notifications and forwards them to y
 ### Step 2 — Get your Chat ID
 
 1. Search for [@userinfobot](https://t.me/userinfobot) in Telegram.
-2. Send `/start`. It will reply with your numeric **Chat ID** (e.g. `123456789`).
+2. Send `/start`. It will reply with your numeric **Chat ID** (e.g. `987654321`).
 
 ### Step 3 — Install the Extension
 
-1. Navigate to `chrome://extensions/` in Google Chrome.
-2. Enable **Developer mode** (toggle in the top-right corner).
-3. Click **Load unpacked** and select the `Notifier` folder from this repository.
+1. Download or clone this repository.
+2. Navigate to `chrome://extensions/` in Google Chrome.
+3. Enable **Developer mode** (toggle in the top-right corner).
+4. Click **Load unpacked** and select the repository folder (`chapar-main` if downloaded as a ZIP).
 
 ### Step 4 — Configure
 
@@ -56,7 +57,7 @@ A Chrome Extension that intercepts Bale Web notifications and forwards them to y
 2. Paste your **Bot Token** and **Chat ID** into the popup.
 3. In the **Contacts** section, add each person you want to track:
    - **Name** — exactly as it appears in Bale notifications.
-   - **Bale UID** — open their chat at `web.bale.ai`, then copy the number from the URL: `?uid=`**`569651864`**
+   - **Bale UID** — open their chat at `web.bale.ai` and copy the number after `?uid=` from the URL bar.
 4. Settings save automatically. You're done.
 
 ---
@@ -75,13 +76,14 @@ A Chrome Extension that intercepts Bale Web notifications and forwards them to y
 ### مرحله دوم — دریافت Chat ID
 
 ۱. ربات [@userinfobot](https://t.me/userinfobot) را در تلگرام جستجو کنید.  
-۲. دکمه Start را بزنید. ربات عدد **Chat ID** شما را نمایش می‌دهد (مثلاً `123456789`).
+۲. دکمه Start را بزنید. ربات عدد **Chat ID** شما را نمایش می‌دهد (مثلاً `987654321`).
 
 ### مرحله سوم — نصب افزونه
 
-۱. آدرس `chrome://extensions/` را در کروم باز کنید.  
-۲. گزینه **Developer mode** را از گوشه بالا-راست فعال کنید.  
-۳. روی **Load unpacked** کلیک کرده و پوشه `Notifier` را انتخاب کنید.
+۱. این مخزن را دانلود یا کلون کنید.  
+۲. آدرس `chrome://extensions/` را در کروم باز کنید.  
+۳. گزینه **Developer mode** را از گوشه بالا-راست فعال کنید.  
+۴. روی **Load unpacked** کلیک کرده و پوشه مخزن را انتخاب کنید (اگر به صورت ZIP دانلود کردید، پوشه `chapar-main` را انتخاب کنید).
 
 ### مرحله چهارم — تنظیمات
 
@@ -113,7 +115,7 @@ Telegram Bot API
 Your Telegram
 ```
 
-The extension injects a service worker into the Bale web context that captures `push` events before they reach the browser's native notification system. It then maps the sender's name to a Bale UID (from your configured contacts) and calls `sendMessage` on the Telegram Bot API — entirely from your local machine.
+The extension injects a content script and service worker into the Bale web context that captures `push` events before they reach the browser's native notification system. It then maps the sender's name to a Bale UID (from your configured contacts) and calls `sendMessage` on the Telegram Bot API — entirely from your local machine.
 
 ---
 
@@ -121,16 +123,17 @@ The extension injects a service worker into the Bale web context that captures `
 
 ```
 chapar/
-├── Notifier/
-│   ├── manifest.json        # Extension manifest (MV3)
-│   ├── background.js        # Service worker — intercepts & forwards
-│   ├── popup.html           # Settings UI
-│   ├── popup.js             # Auto-save logic
-│   └── icons/
-│       ├── icon16.png
-│       ├── icon48.png
-│       └── icon128.png
-└── README.md
+├── manifest.json        # Extension manifest (MV3)
+├── background.js        # Service worker — intercepts & forwards
+├── content.js           # Content script injected into Bale
+├── inject.js            # Page-level injection helper
+├── popup.html           # Settings UI
+├── popup.js             # Auto-save logic
+├── popup.css            # Popup styles
+└── icons/
+    ├── icon16.png
+    ├── icon48.png
+    └── icon128.png
 ```
 
 ---
